@@ -1,5 +1,5 @@
 import mongoose , {Schema,Document} from "mongoose";
-import { unique } from "next/dist/build/utils";
+
 
 export  interface  Message extends Document{
     content: string;
@@ -17,6 +17,7 @@ export interface User extends Document{
     email:string,
     password:string,
     verifyCode:string,
+    verifyCodeExpiry:Date,
     isVerified:boolean,
     isAcceptingMassage:boolean,
     messages: Message[]
@@ -29,6 +30,7 @@ const UserSchema:Schema<User> = new Schema({
     email: {type: String, required:[ true,'Email is required'],match:[/.+\@.+\..+/,'please use a valid email address'], unique: true},
     password: {type: String, required:[ true, "Password is required"]},
     verifyCode: {type: String ,required:[true,"verify code is required"]},
+    verifyCodeExpiry: {type: Date ,required:[true,"verify code expiry is required"]},
     isVerified:{type:Boolean,default:false},
     isAcceptingMassage: {type: Boolean, default: true},
     messages: [MessageSchema],
