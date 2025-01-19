@@ -10,6 +10,9 @@ const MessageSchema:Schema<Message> = new Schema({
     content: {type: String, required: true},
     createdAt: {type: Date, default: Date.now}
 })
+const MessageModel = (mongoose.models.Message as mongoose.Model<Message>) || mongoose.model<Message>("Message",MessageSchema)
+
+
 
 
 export interface User extends Document{
@@ -38,3 +41,4 @@ const UserSchema:Schema<User> = new Schema({
 
 const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User",UserSchema)
 export default UserModel;
+export { MessageModel };
